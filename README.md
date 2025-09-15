@@ -20,7 +20,7 @@ This project is designed for educational purposes and proof-of-concept demonstra
 ## API Testing Results
 
 ### Terminal Testing
-![Terminal API Testing](screenshots/Terminal%20ss.png)
+![Terminal API Testing](screenshots/Terminal.png)
 
 Successful API calls showing:
 - Single text analysis returning positive sentiment (0.9999 confidence)
@@ -28,7 +28,7 @@ Successful API calls showing:
 - Fast inference times (65ms and 233ms total for batch)
 
 ### Browser Interface
-![Browser API Interface](screenshots/Browser%20ss.png)
+![Browser API Interface](screenshots/Browser.jpeg)
 
 Browser view of API root endpoint displaying:
 - Healthy status
