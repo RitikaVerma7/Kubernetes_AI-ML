@@ -17,12 +17,43 @@ This project is designed for educational purposes and proof-of-concept demonstra
 - **Resource management** optimized for ML workloads
 - **API versioning** with detailed confidence analysis
 
+## API Testing Results
+
+### Terminal Testing
+![Terminal API Testing](screenshots/Terminal%20ss.png)
+
+Successful API calls showing:
+- Single text analysis returning positive sentiment (0.9999 confidence)
+- Batch processing of 5 texts with mixed sentiments
+- Fast inference times (65ms and 233ms total for batch)
+
+### Browser Interface
+![Browser API Interface](screenshots/Browser%20ss.png)
+
+Browser view of API root endpoint displaying:
+- Healthy status
+- Version v1.0
+- All endpoints properly documented
+
 ## Architecture
 
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Load Balancer │────│  EKS Cluster    │────│  ECR Registry   │
+│                 │    │                 │    │                 │
+│   External IP   │    │  ┌───────────┐  │    │  sentiment-api  │
+└─────────────────┘    │  │    Pod    │  │    │     :v1.0       │
+                       │  │  Flask+ML │  │    │     :v2.0       │
+                       │  └───────────┘  │    └─────────────────┘
+                       │  ┌───────────┐  │
+                       │  │    Pod    │  │
+                       │  │  Flask+ML │  │
+                       │  └───────────┘  │
+                       │                 │
+                       │      HPA        │
+                       └─────────────────┘
 
 
 ## Prerequisites
-
 - AWS Account with EKS cluster
 - Docker installed
 - kubectl configured for your EKS cluster

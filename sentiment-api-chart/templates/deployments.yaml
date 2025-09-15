@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}
+  labels:
+    app: {{ .Chart.Name }}
+    version: {{ .Values.image.tag }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+        version: {{ .Values.image.tag }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: {{ .Values.service.targetPort }}
+          name: http
+        resources:
+          {{- toYaml .Values.resources | nindent 12 }}
+        {{- if .Values.healthCheck.enabled }}
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.healthCheck.path }}
+            port: http
+          initialDelaySeconds: {{ .Values.healthCheck.initialDelaySeconds }}
+          periodSeconds: {{ .Values.healthCheck.periodSeconds }}
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.healthCheck.path }}
+            port: http
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        {{- end }}
+        env:
+        - name: ENVIRONMENT
+          value: "production"
