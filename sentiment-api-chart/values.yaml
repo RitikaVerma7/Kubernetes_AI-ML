@@ -1,7 +1,7 @@
 replicaCount: 2
 
 image:
-  repository: 061051239199.dkr.ecr.us-east-1.amazonaws.com/sentiment-api
+  repository: xxx.dkr.ecr.us-east-1.amazonaws.com/sentiment-api
   tag: v1.0
   pullPolicy: IfNotPresent
 
