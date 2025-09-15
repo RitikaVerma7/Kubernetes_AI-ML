@@ -37,20 +37,7 @@ Browser view of API root endpoint displaying:
 
 ## Architecture
 
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Load Balancer │────│  EKS Cluster    │────│  ECR Registry   │
-│                 │    │                 │    │                 │
-│   External IP   │    │  ┌───────────┐  │    │  sentiment-api  │
-└─────────────────┘    │  │    Pod    │  │    │     :v1.0       │
-                       │  │  Flask+ML │  │    │     :v2.0       │
-                       │  └───────────┘  │    └─────────────────┘
-                       │  ┌───────────┐  │
-                       │  │    Pod    │  │
-                       │  │  Flask+ML │  │
-                       │  └───────────┘  │
-                       │                 │
-                       │      HPA        │
-                       └─────────────────┘
+![Achitecture](screenshots/Arch.png)
 
 
 ## Prerequisites
